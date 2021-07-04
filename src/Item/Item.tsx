@@ -1,3 +1,4 @@
+import Button from "@material-ui/core/Button";
 // Types
 import { CartItemType } from "../App";
 // Styles
@@ -17,6 +18,13 @@ const Item: React.FC<Props> = ({ item }) => {
         <p>{item.description}</p>
         <h3>${item.price}</h3>
       </div>
+      <Button
+        onClick={() => {
+          alert("d");
+        }}
+      >
+        Add to cart
+      </Button>
     </Wrapper>
   );
 };
