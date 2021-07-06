@@ -6,10 +6,10 @@ import { Wrapper } from "./Item.styles";
 
 type Props = {
   item: CartItemType;
-  // handleAddToCart: (clickedItem: CartItemType) => void;
+  handleAddToCart: (clickedItem: CartItemType) => void;
 };
 
-const Item: React.FC<Props> = ({ item }) => {
+const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
   return (
     <Wrapper>
       <img src={item.image} alt={item.title} />
@@ -20,7 +20,7 @@ const Item: React.FC<Props> = ({ item }) => {
       </div>
       <Button
         onClick={() => {
-          alert("d");
+          handleAddToCart(item);
         }}
       >
         Add to cart
