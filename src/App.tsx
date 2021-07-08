@@ -35,9 +35,33 @@ function App() {
     return items.reduce((ack: number, item) => ack + item.amount, 0);
   };
   const handleAddToCart = (clickedItem: CartItemType) => {
-    const isItemInCart;
+    setCartItems((prev) => {
+      const isItemInCart = cartItems.find((item) => item.id === clickedItem.id);
+      if (isItemInCart) {
+        return prev.map((item) => {
+          if (item.id === clickedItem.id) {
+            return { ...item, amount: item.amount + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+      return [...prev, { ...clickedItem, amount: 1 }];
+    });
   };
-  const handleRemoveFromCart = () => {};
+
+  const handleRemoveFromCart = (clickedItem: CartItemType) => {
+    setCartItems((prev) => {
+      return prev.map((item) => {
+        if (item.id === clickedItem.id) {
+          if (item.amount === 1) return item;
+          return { ...item, amount: item.amount - 1 };
+        } else {
+          return item;
+        }
+      });
+    });
+  };
 
   if (isLoading) return <LinearProgress />;
   if (error) return <>Something went wrong ...</>;
